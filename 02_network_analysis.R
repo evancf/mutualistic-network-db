@@ -15,10 +15,10 @@ for(i in net_ids ){
 # Calculate metrics --------------------
 
 # Here's an example of how you might get started with the analysis of 
-# various network metrics
+# various network metrics using the bipartite package
 library("bipartite")
 
-# This takes quite a while
+# A few metrics that are fast
 net_metrics <- lapply(net_id_list, function(x) {
   networklevel(x, index = c("connectance", "nestedness", "links per species"))
 }) %>% 
@@ -44,6 +44,14 @@ net_metrics %>%
              color = `links per species`)) +
   geom_point() +
   theme_classic()
+
+
+
+# Getting started with an igraph version  --------------------
+library("igraph")
+net_id_list_igraph <- lapply(net_id_list, igraph::graph_from_incidence_matrix)
+
+plot(net_id_list_igraph[[22]])
 
 
 
