@@ -1,6 +1,7 @@
 library(tidyverse)
 library(shiny)
 library(visNetwork)
+library(leaflet)
 
 
 # UI -------------------
@@ -24,6 +25,12 @@ fluidPage(
     # Button
     downloadButton("downloadData", "Download this network"),
     
-  )
+    verbatimTextOutput('citation_text'),
+    
+    
+  ),
   
+  # fluidRow(
+  #   
+  # )
 )

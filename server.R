@@ -1,15 +1,14 @@
 library(shiny)
 library(visNetwork)
-#library(htmlwidgets)
-#library(shinyWidgets) #install.packages("shinyWidgets")
 library(leaflet)
-#library("shinythemes")
-
 
 # Pull in data
 
-net_long <- read.csv("data/network_data_long.csv")[,-1]
+net_long <- read.csv("./data/network_data_long.csv")[,-1]
 
+# Had too many formatting issues with the csv version of this, so will upload
+# an excel file...
+net_reference <- readxl::read_excel("./data/network_references.xlsx")
 
 net_ids <- list.files("./data/incidence_matrices") %>% 
   gsub(".csv", "", ., fixed = T)
@@ -23,7 +22,7 @@ for(i in net_ids ){
 net_metadata <- read.csv("./data/network_metadata.csv")
 
 
-function(input, output){
+function(input, output, session){
   
   output$mymap <- renderLeaflet({
     leaflet() %>%
@@ -35,6 +34,7 @@ function(input, output){
                  popup = ~as.character(study_id), 
                  label = ~as.character(net_id),
                  layerId = ~as.character(net_id),
+                 group = ~as.character(study_id),
                  data = net_metadata,
                  clusterOptions = markerClusterOptions(maxClusterRadius = 40))
   })
@@ -49,6 +49,7 @@ function(input, output){
     
     return(net)
   })
+  
   
   
   
@@ -99,7 +100,21 @@ function(input, output){
       write.csv(net_id_list[[clicked_net()]], file, row.names = T)
     }
   )
+
   
+  rv <- reactiveValues()
+  rv$citation <- "Fricke, E. C., Tewksbury, J. J., & Rogers, H. S. (2018). Defaunation leads to interaction deficits, not interaction compensation, in an island seed dispersal network. Global change biology, 24(1), e190-e200."
+
+  observeEvent(input$mymap_marker_click, {
+    
+    rv$citation <- net_reference %>% 
+      filter(net_reference$'Study ID' == net_metadata$study_id[which(net_metadata$net_id == clicked_net())][1]) %>% 
+      dplyr::select(Reference) %>% as.character()
+
+  })
+  
+  
+  output$citation_text <- renderText(rv$citation)
   
 }
 
