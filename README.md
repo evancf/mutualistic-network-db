@@ -1,5 +1,5 @@
 # mutualistic-network-db
-Sharing data from published studies of ecological networks involving plants and seed dispersers
+Data from published studies of ecological networks involving plants and seed dispersers
 
 
 ### Data
@@ -15,14 +15,14 @@ Metadata relevant to each study is also presented in network_metadata.csv. This 
 
 ### A typical workflow
 
-The 02_network_analysis.R script gives an example of how you might work with these data. 
+The 02_network_analysis.R script gives an example of how you might start working with these data in R. 
 
 
 ### Citing this resource and asking for help
 
-Please feel free to reach out with questions to ef13 *at* rice.edu or evanfricke *at* gmail.com. If you use this resource for a publication, please include the following citations:
+Please feel free to reach out with questions to ef13 *at* rice.edu or evanfricke *at* gmail.com. If you use this resource for a publication, please include the following citations associated with the original publication (https://www.nature.com/articles/s41586-020-2640-y) and associated dataset:
 
-Fricke, E. C., & Svenning, J. C. (2020). Accelerating homogenization of the global plant–frugivore meta-network. Nature, 585(7823), 74-78.
+Fricke, E. C., & Svenning, J. C. (2020). Accelerating homogenization of the global plant–frugivore meta-network. Nature, 585(7823), 74-78. 
 
 Fricke, Evan; Svenning, Jens-Christian (2020), Data from: Accelerating homogenization of the global plant–frugivore meta-network, Dryad, Dataset, https://doi.org/10.5061/dryad.44j0zpcbx
 
